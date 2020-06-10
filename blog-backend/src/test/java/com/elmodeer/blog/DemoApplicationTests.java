@@ -1,4 +1,4 @@
-package com.blog.demo;
+package com.elmodeer.blog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
