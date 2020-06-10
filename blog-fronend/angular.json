@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "blog-frontend": {
+    "blog-fronend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/blog-frontend",
+            "outputPath": "dist/blog-fronend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "blog-frontend:build"
+            "browserTarget": "blog-fronend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "blog-frontend:build:production"
+              "browserTarget": "blog-fronend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "blog-frontend:build"
+            "browserTarget": "blog-fronend:build"
           }
         },
         "test": {
@@ -114,15 +114,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "blog-frontend:serve"
+            "devServerTarget": "blog-fronend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "blog-frontend:serve:production"
+              "devServerTarget": "blog-fronend:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "blog-frontend"
+  "defaultProject": "blog-fronend"
 }
