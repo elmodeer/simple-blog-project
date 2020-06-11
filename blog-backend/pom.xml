@@ -8,10 +8,10 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.blog</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.elmodeer</groupId>
+	<artifactId>blog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>simple_blog</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
