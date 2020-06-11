@@ -1,5 +1,7 @@
 <div class="container">
-    <header class="jumbotron">
-      <p>{{ content }}</p>
-    </header>
-  </div>
+    <h2>Articles</h2>
+    <ul class="articles">
+      <app-article *ngFor="let article of articles"  [article]=article>
+      </app-article>
+    </ul>
+

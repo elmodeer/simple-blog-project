@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { Article } from '../models/Article';
+import { ARTICLES } from '../mock-articles';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +11,26 @@ import { UserService } from '../_services/user.service';
 export class HomeComponent implements OnInit {
 
   content: string;
+  articles: Article[];
+
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getPublicContent().subscribe(
-      data => {
-        this.content = data;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
+    this.getArticles();
+
+    // this.userService.getPublicContent().subscribe(
+    //   data => {
+    //     this.content = data;
+    //   },
+    //   err => {
+    //     this.content = JSON.parse(err.error).message;
+    //   }
+    // );
   }
+
+  getArticles(): void{
+    this.articles = ARTICLES;
+  }
+  
 }
