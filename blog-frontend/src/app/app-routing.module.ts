@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { ArticleContentComponent } from './article-content/article-content.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: "content/:id", component: ArticleContentComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

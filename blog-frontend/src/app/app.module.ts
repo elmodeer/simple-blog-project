@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { ArticleComponent } from './article/article.component';
+import { ArticleContentComponent } from './article-content/article-content.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ArticleComponent } from './article/article.component';
     BoardAdminComponent,
     BoardModeratorComponent,
     BoardUserComponent,
-    ArticleComponent
+    ArticleComponent,
+    ArticleContentComponent
   ],
   imports: [
     BrowserModule,
