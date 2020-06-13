@@ -1,11 +1,48 @@
-<div class="card mb-3 card-custom">
-    <img src="assets/img/test.jpeg" height="500" width="1107.5" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{article.title}}</h5>
-      <p class="card-text">{{article.content}}</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="goBack()">
-        back
-    </button>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+        <div class="card mb-3 card-custom">
+          <img src="assets/img/test.jpeg" height="400" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{article.title}}</h5>
+            <p class="card-text">{{article.content}}</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"
+              (click)="goBack()">
+              back
+            </button>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="card-body">
+          <div class="author">
+            <img src="../assets/img/H.jpg" class="rounded">
+            <h4 class="title">Hesham Hussen</h4>
+            <!-- <p class="description">
+            michael24
+          </p> -->
+          </div>
+          <p class="description text-center">
+            I'm a pretty lazy person and am prepared to work quite hard in order to avoid work.
+            -Martin Fowler
+          </p>
+        </div>
+        <hr>
+        <div class="button-container">
+          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="fab fa-twitter"></i>
+          </button>
+          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="fab fa-google-plus-g"></i>
+          </button>
+          <button type="button" class="btn btn-outline-info custom-follow">Follow</button>
+        </div>
+      </div>
     </div>
   </div>
+</div>
