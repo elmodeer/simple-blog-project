@@ -17,4 +17,8 @@ export class ArticleComponent implements OnInit {
   ngOnInit(): void {
     // this.articleTitle = "Article Title"
   }
+
+  bookmark() {
+    alert('bookmarked.');
+  }
 }
