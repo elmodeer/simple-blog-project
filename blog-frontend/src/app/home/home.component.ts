@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { UserService } from '../_services/user/user.service';
 import { Article } from '../models/Article';
 import { ARTICLES } from '../mock-articles';
+import { ArticleService } from '../_services/article/article.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomeComponent implements OnInit {
   articles: Article[];
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private articleService: ArticleService) { }
 
   ngOnInit(): void {
     this.getArticles();
@@ -30,7 +32,13 @@ export class HomeComponent implements OnInit {
   }
 
   getArticles(): void{
-    this.articles = ARTICLES;
+    this.articleService.findAll()
+      .subscribe(articles => {
+        this.articles = articles
+      }),
+      (err: any) => {
+        console.log(err.error);
+      }
   }
   
 }

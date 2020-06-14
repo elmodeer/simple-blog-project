@@ -26,8 +26,8 @@ public class AddressCustomDeserializer extends StdDeserializer<Address> {
 
         Integer id = node.get("id").asText() == "null" ? null : node.get("id").asInt();
         Address address = new Address(node.get("address").asText(),
-                           node.get("city").asText(),
-                           node.get("zipCode").asInt());
+                                      node.get("city").asText(),
+                                      node.get("zipCode").asInt());
         if (id != null)
             address.setId(new Long(id));
 

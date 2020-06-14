@@ -1,4 +1,5 @@
 import { Address } from './Address';
+import { Article } from './Article';
 
 export interface User {
     id: string;
@@ -10,4 +11,6 @@ export interface User {
     firstName?: string;
     lastName?: string;
     roles: any[];
+    articles: Article[];
+    
 }

@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" *ngIf=article>
   <div class="row">
     <div class="col-md-8">
         <div class="card mb-3 card-custom">
@@ -6,7 +6,7 @@
           <div class="card-body">
             <h5 class="card-title">{{article.title}}</h5>
             <p class="card-text">{{article.content}}</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <p class="card-text"><small class="text-muted">Last updated {{article.createdAt}}</small></p>
             <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"
               (click)="goBack()">
               back
@@ -19,14 +19,13 @@
         <div class="card-body">
           <div class="author">
             <img src="../assets/img/H.jpg" class="rounded">
-            <h4 class="title">Hesham Hussen</h4>
+            <h4 class="title">{{article.author.firstName}} {{article.author.lastName}}</h4>
             <!-- <p class="description">
             michael24
           </p> -->
           </div>
           <p class="description text-center">
-            I'm a pretty lazy person and am prepared to work quite hard in order to avoid work.
-            -Martin Fowler
+            {{article.author.aboutMe}}
           </p>
         </div>
         <hr>

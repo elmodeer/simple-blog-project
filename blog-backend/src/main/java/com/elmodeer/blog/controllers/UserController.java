@@ -15,14 +15,12 @@ import javax.persistence.EntityNotFoundException;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     UserRepository userRepository;
 
-    //    @RequestMapping("/login")
-    //    public Principal user(Principal user) {
-    //        return user;
-    //    }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserByUserId(@PathVariable int id) {
@@ -33,7 +31,8 @@ public class UserController {
     @PostMapping("/edit")
     public ResponseEntity<User> editUserDetails(@RequestBody User user) {
         logger.info("Editing user details with the id: " + user.getId());
-        // TODO!! bind the address to the user. Is it a must ???
+        // bind the address to the user. is it a must ? yes as otherwise new address creation
+        // will throw exception
         user.getAddress().setUser(user);
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }

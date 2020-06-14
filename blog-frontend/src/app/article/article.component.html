@@ -1,5 +1,9 @@
 <div class="card custom-card">
-    <h5 class="card-header">{{article.title}}</h5>
+    <div class="card-header both">
+        <h5 id="title">{{article.title}}</h5>
+        <!-- <h6 id="author" >by Hesham Hussen</h6> -->
+        <p id="author"><em>by Hesham Hussen</em></p>
+    </div>
     <div class="card-body">
         <p class="card-text">{{article.content}}</p>
         <a routerLink="/content/{{article.id}}" class="btn btn-primary">Continue Reading</a>
