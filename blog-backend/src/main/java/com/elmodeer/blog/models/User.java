@@ -1,12 +1,16 @@
 package com.elmodeer.blog.models;
 
-import lombok.Data;
+import com.elmodeer.blog.serialization.AddressCustomDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,9 +20,10 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +40,18 @@ public class User {
 
     @NotBlank
     @Size(max = 120)
+//    @JsonIgnore
     private String password;
+
+    private String aboutMe;
+
+    private String firstName;
+
+    private String lastName;
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonDeserialize(using = AddressCustomDeserializer.class)
+    private Address address;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -43,12 +59,21 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String username, String email, String password) {
+//    public User(String username, String email, String password,
+//                String firstName , String aboutMe, String lastName) {
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.aboutMe = aboutMe;
+//
+//    }
+
+
+    public User(String username, String email, String encode) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
-
-
 }
