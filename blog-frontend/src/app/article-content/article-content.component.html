@@ -2,7 +2,12 @@
   <div class="row">
     <div class="col-md-8">
         <div class="card mb-3 card-custom">
-          <img src="assets/img/test.jpeg" height="400" alt="...">
+          <div class="img-wrapper">
+            <img class="img-responsive custom-img" src="assets/img/test.jpeg"  alt="...">
+            <div class="img-overlay">
+              <button class="btn btn-md btn-success">Edit</button>
+            </div>
+          </div>
           <div class="card-body">
             <h5 class="card-title">{{article.title}}</h5>
             <p class="card-text">{{article.content}}</p>

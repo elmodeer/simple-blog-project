@@ -18,3 +18,25 @@ hr {
 .custom-follow {
     margin-left: 100px;
 }
+
+.custom-img {
+    max-width: 100%;
+}
+.img-wrapper {
+    position: relative;
+    max-width: 100%;
+}
+.img-overlay {
+    position: absolute;
+    top: 0;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.img-wrapper .img-overlay{
+    display: none;
+}
+  
+.img-wrapper:hover .img-overlay{
+    display: grid;
+}

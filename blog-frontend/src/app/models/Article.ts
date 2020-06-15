@@ -7,4 +7,5 @@ export interface Article {
     author: User;
     createdAt: string;
     updatedAt: string;
+    imageUrl: string;
   }

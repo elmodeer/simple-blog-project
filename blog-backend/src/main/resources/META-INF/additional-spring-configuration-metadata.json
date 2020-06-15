@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "elmodeer.app.jwtExpirationMs",
+      "type": "java.lang.String",
+      "description": "Description for elmodeer.app.jwtExpirationMs."
+    },
+    {
+      "name": "elmodeer.app.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for elmodeer.app.jwtSecret."
+    }
+  ] }

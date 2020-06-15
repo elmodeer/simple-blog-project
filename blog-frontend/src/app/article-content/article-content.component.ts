@@ -30,14 +30,13 @@ export class ArticleContentComponent implements OnInit {
     this.articleService.findArticleById(id)
         .subscribe(article => {
           this.article = article
-          console.log(this.article.createdAt);
         }),
         (err: any) => {
           console.log(err.error);
         }
-    // let date: Date = new Date();
-    // date = this.article.createdAt;
-    // console.log(date);
+  }
+
+  editImage(): void{
 
   }
 

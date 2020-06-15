@@ -32,6 +32,7 @@ public class Article implements Serializable {
 
     private String title;
     private String content;
+    private String imageUrl;
 
 
     @CreatedDate
