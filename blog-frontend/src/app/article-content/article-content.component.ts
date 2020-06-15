@@ -15,12 +15,13 @@ export class ArticleContentComponent implements OnInit {
 
   @Input() article: Article;
   lastUpdated: string;
+  currentFile: File;
 
   constructor(private route: ActivatedRoute, private location: Location, 
               private articleService: ArticleService) { }
 
   ngOnInit(): void {
-    console.log(this.article);
+    // console.log(this.article);
     this.getArticle();
     this.formatLastUpdated()
   }
@@ -30,14 +31,23 @@ export class ArticleContentComponent implements OnInit {
     this.articleService.findArticleById(id)
         .subscribe(article => {
           this.article = article
+
         }),
         (err: any) => {
           console.log(err.error);
         }
   }
 
+  // bad Hack
+  selectFileAndUpload(event) {
+    this.currentFile = event.target.files.item(0);
+    this.articleService.editPostImage(this.currentFile, this.article.id)
+        .subscribe(data => console.log(data));
+    this.reloadPage();    
+  }
+  
   editImage(): void{
-
+    // this.articleService.editPostImage();
   }
 
   // TODO!! maybe needed for better formating
@@ -46,7 +56,12 @@ export class ArticleContentComponent implements OnInit {
     if(this.article) {
       let dayAndTime = this.article.createdAt.split(" ");
     }
+     
     return "";
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
   goBack(): void {
