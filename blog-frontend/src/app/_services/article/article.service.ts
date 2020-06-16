@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Article } from 'src/app/models/Article';
+import { API_BASE_URL } from 'src/app/_helpers/auth.interceptor';
 
-const API_URL = 'http://localhost:8080/api/articles/';
-
+API_BASE_URL
+// const API_URL = 'http://localhost:8080/api/articles/';
+const API_URL = API_BASE_URL + 'api/articles/';
 
 @Injectable({
   providedIn: 'root'

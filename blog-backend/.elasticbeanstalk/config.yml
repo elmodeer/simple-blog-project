@@ -1,0 +1,20 @@
+branch-defaults:
+  default:
+    environment: blog-backend-dev
+    group_suffix: null
+deploy:
+  artifact: target/blog-0.0.1-SNAPSHOT.jar
+global:
+  application_name: blog-backend-dev
+  branch: null
+  default_ec2_keyname: blog-backend-key
+  default_platform: Java 8 running on 64bit Amazon Linux
+  default_region: eu-central-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application
