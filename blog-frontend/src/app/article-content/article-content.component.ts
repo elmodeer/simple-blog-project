@@ -16,14 +16,13 @@ export class ArticleContentComponent implements OnInit {
   @Input() article: Article;
   lastUpdated: string;
   currentFile: File;
+  imageUrl: string;
 
   constructor(private route: ActivatedRoute, private location: Location, 
               private articleService: ArticleService) { }
 
   ngOnInit(): void {
-    // console.log(this.article);
     this.getArticle();
-    this.formatLastUpdated()
   }
 
   getArticle(): void {
@@ -31,7 +30,7 @@ export class ArticleContentComponent implements OnInit {
     this.articleService.findArticleById(id)
         .subscribe(article => {
           this.article = article
-
+          this.getImage();
         }),
         (err: any) => {
           console.log(err.error);
@@ -42,13 +41,23 @@ export class ArticleContentComponent implements OnInit {
   selectFileAndUpload(event) {
     this.currentFile = event.target.files.item(0);
     this.articleService.editPostImage(this.currentFile, this.article.id)
-        .subscribe(data => console.log(data));
-    this.reloadPage();    
+        .subscribe(data => {
+          this.reloadPage();
+        });
   }
   
-  editImage(): void{
-    // this.articleService.editPostImage();
+  getImage(): void{
+    this.articleService.getGetSignedUrl(this.article.id)
+        .subscribe(imageUrl => {
+          this.imageUrl = imageUrl;
+          // console.log(imageUrl);
+        }),
+        (err: any) => {
+          console.log(err.error);
+        };
+
   }
+
 
   // TODO!! maybe needed for better formating
   formatLastUpdated(): string {

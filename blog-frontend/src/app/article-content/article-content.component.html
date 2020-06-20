@@ -3,7 +3,7 @@
     <div class="col-md-8">
         <div class="card mb-3 card-custom">
           <div class="img-wrapper">
-            <img class="img-responsive custom-img" src={{article.imageUrl}} >
+            <img class="img-responsive custom-img" [src]=imageUrl *ngIf=imageUrl>
             <div class="img-overlay">
               <label class="btn btn-md btn-success">
                 <input type="file" (change)="selectFileAndUpload($event)" />

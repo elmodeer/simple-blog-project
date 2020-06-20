@@ -32,7 +32,10 @@ export class ArticleService {
 
     formData.append('file', file);
     formData.append('articleId', articleId.toString());
-
     return this.http.post(API_URL + 'editImage', formData);
+  }
+
+  getGetSignedUrl(articleId: number): Observable<any>{
+    return this.http.get(API_URL + 'image/' + articleId, { responseType: 'text' });
   }
 }
