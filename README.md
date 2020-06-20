@@ -4,7 +4,7 @@ This project is my sandbox to learn multiple things and various new technologies
   2. Roles for different users -> (ROLE_USER, ROLE_MODERATOR, ROLE_ADMIN) 
   3. User profile tab
   4. Changing the image of an article through the presigned url pattern on AWS(S3).
-![alt text](https://github.com/elmodeer/simple-blog-project/blob/master/blog-backend/blog-arch.png)
+![project Architecture ](https://github.com/elmodeer/simple-blog-project/blob/master/blog-backend/images/blog-arch.png)
 
 Following Functionality are to be implemeted: 
   1. Follow article author feature
@@ -18,3 +18,12 @@ Following Functionality are to be implemeted:
   3. Create an S3 bucket with the name "simple-blog-s3-dev" and region "eu-central-1" (Optional)
   4. Start the backend with `mvn spring-boot:run`
   5. Start the frontend with `npm i ; ng server`
+  
+# Screenshots
+  1. Feed
+  ![Feed](https://github.com/elmodeer/simple-blog-project/blob/master/blog-backend/images/feed.png)
+  2. User profile
+  ![Feed](https://github.com/elmodeer/simple-blog-project/blob/master/blog-backend/images/userProfile.png)
+  3. Article content
+  ![ac](https://github.com/elmodeer/simple-blog-project/blob/master/blog-backend/images/articleContent.png)
+  
