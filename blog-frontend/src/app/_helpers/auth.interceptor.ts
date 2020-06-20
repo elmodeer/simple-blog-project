@@ -5,7 +5,9 @@ import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http'
 import { TokenStorageService } from '../_services/token-storage/token-storage.service';
 
 const TOKEN_HEADER_KEY = 'Authorization';
-export const API_BASE_URL = 'http://blog-backend-dev.eu-central-1.elasticbeanstalk.com/'
+// export const API_BASE_URL = 'http://blog-backend-dev.eu-central-1.elasticbeanstalk.com/'
+export const API_BASE_URL = 'http://localhost:8080/'
+
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

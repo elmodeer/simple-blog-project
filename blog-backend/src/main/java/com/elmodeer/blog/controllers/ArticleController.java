@@ -1,5 +1,6 @@
 package com.elmodeer.blog.controllers;
 
+import com.elmodeer.blog.aws.AWSUtility;
 import com.elmodeer.blog.models.Article;
 import com.elmodeer.blog.models.User;
 import com.elmodeer.blog.repository.ArticleRepository;
@@ -55,9 +56,16 @@ public class ArticleController {
         return ResponseEntity.ok().body(article);
     }
 
+    @GetMapping("/image/{articleId}")
+    public ResponseEntity<String> getGetSignedUrl(@PathVariable int articleId) {
+        Article article = articleRepository.findById(new Long(articleId))
+                .orElseThrow(() -> new EntityNotFoundException("No such article was found"));
+        String getSignedUrl = AWSUtility.getPresignedURL(article.getImageUrl());
+        return ResponseEntity.ok().body(getSignedUrl);
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<Article>> findAll(){
-        logger.info("Fetching all articles");
         List<Article> articles = articleRepository.findAll();
         logger.info("Fetched " + articles.size() + " articles");
         return ResponseEntity.ok().body(articles);
@@ -65,14 +73,14 @@ public class ArticleController {
 
     @PostMapping("/editImage")
     public ResponseEntity<Article> editArticleImage(@RequestParam("file") MultipartFile file, @RequestParam("articleId") int id){
-        String message = "";
         Article article = articleRepository.findById(new Long(id))
                                     .orElseThrow(() -> new EntityNotFoundException("No such article"));
         try {
-            storageService.save(file);
-            logger.info("Uploaded the file successfully: " + file.getOriginalFilename());
-            article.setImageUrl("uploads/" + file.getOriginalFilename());
-            articleRepository.save(article);
+            if (AWSUtility.generatePresignedUrlAndUploadObject(file)) {
+                logger.info("Uploaded " + file.getOriginalFilename() +  " successfully");
+                article.setImageUrl(file.getOriginalFilename());
+                articleRepository.save(article);
+            }
             return ResponseEntity.status(HttpStatus.OK).body(article);
         } catch (Exception e) {
             logger.info("Could not upload the file: " + file.getOriginalFilename() + "!");
