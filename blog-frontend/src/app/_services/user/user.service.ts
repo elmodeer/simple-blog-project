@@ -40,4 +40,20 @@ export class UserService {
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
+
+  updateImageUrl(fileName: string, userId: number){
+    const formData: FormData = new FormData();
+
+    formData.append('fileName', fileName);
+    formData.append('userId', userId.toString());
+    return this.http.post(API_URL + 'updateImage', formData);
+  }
+
+  generatePresignedPutUrl(file: File): Observable<any> {
+    return this.http.get(API_URL + 'putImage/' + file.name, { responseType: 'text' });
+  }
+
+  generatePresignedGetUrl(userId: number): Observable<any>{
+    return this.http.get(API_URL + 'getImage/' + userId, { responseType: 'text' });
+  }
 }

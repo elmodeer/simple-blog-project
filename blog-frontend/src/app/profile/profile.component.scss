@@ -14,3 +14,24 @@ hr {
      margin-top: 0rem;
      margin-bottom: 0rem;
 }
+.custom-img {
+    width: 300px;
+}
+.img-wrapper {
+    position: relative;
+    max-width: 100%;
+}
+.img-overlay {
+    position: absolute;
+    top: 0;
+    // margin-left: 20px;
+    margin-top: 20px;
+}
+
+.img-wrapper .img-overlay{
+    display: none;
+}
+  
+.img-wrapper:hover .img-overlay{
+    display: grid;
+}

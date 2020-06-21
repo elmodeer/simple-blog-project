@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -56,14 +55,6 @@ public class ArticleController {
         return ResponseEntity.ok().body(article);
     }
 
-    @GetMapping("/image/{articleId}")
-    public ResponseEntity<String> getGetSignedUrl(@PathVariable int articleId) {
-        Article article = articleRepository.findById(new Long(articleId))
-                .orElseThrow(() -> new EntityNotFoundException("No such article was found"));
-        String getSignedUrl = AWSUtility.getPresignedURL(article.getImageUrl());
-        return ResponseEntity.ok().body(getSignedUrl);
-    }
-
     @GetMapping("/all")
     public ResponseEntity<List<Article>> findAll(){
         List<Article> articles = articleRepository.findAll();
@@ -71,20 +62,34 @@ public class ArticleController {
         return ResponseEntity.ok().body(articles);
     }
 
-    @PostMapping("/editImage")
-    public ResponseEntity<Article> editArticleImage(@RequestParam("file") MultipartFile file, @RequestParam("articleId") int id){
-        Article article = articleRepository.findById(new Long(id))
-                                    .orElseThrow(() -> new EntityNotFoundException("No such article"));
+    @PostMapping("/updateImage")
+    public ResponseEntity<Article> updateImageUrl(@RequestParam("fileName") String fileName, @RequestParam("articleId") int articleId) {
+        Article article = articleRepository.findById(new Long(articleId))
+                            .orElseThrow(() -> new EntityNotFoundException("no such article"));
+        article.setImageUrl(fileName);
+        articleRepository.save(article);
+        return ResponseEntity.ok().body(article);
+    }
+
+    @GetMapping("/putImage/{fileName}")
+    public ResponseEntity<String> generatePresignedPutUrl(@PathVariable String fileName){
         try {
-            if (AWSUtility.generatePresignedUrlAndUploadObject(file)) {
-                logger.info("Uploaded " + file.getOriginalFilename() +  " successfully");
-                article.setImageUrl(file.getOriginalFilename());
-                articleRepository.save(article);
+            String presignedPutUrl = AWSUtility.generatePresignedPutUrl(fileName);
+            if (presignedPutUrl != null) {
+                return ResponseEntity.status(HttpStatus.OK).body(presignedPutUrl);
             }
-            return ResponseEntity.status(HttpStatus.OK).body(article);
+            throw new Exception();
         } catch (Exception e) {
-            logger.info("Could not upload the file: " + file.getOriginalFilename() + "!");
+            logger.info("Could not generate presigned Url for the file: " + fileName + "!");
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
         }
+    }
+
+    @GetMapping("/getImage/{articleId}")
+    public ResponseEntity<String> generatePresignedGetUrl(@PathVariable int articleId) {
+        Article article = articleRepository.findById(new Long(articleId))
+                .orElseThrow(() -> new EntityNotFoundException("No such article was found"));
+        String getSignedUrl = AWSUtility.generatePresignedGetUrl(article.getImageUrl());
+        return ResponseEntity.ok().body(getSignedUrl);
     }
  }

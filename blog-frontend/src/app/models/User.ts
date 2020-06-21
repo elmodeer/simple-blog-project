@@ -2,7 +2,7 @@ import { Address } from './Address';
 import { Article } from './Article';
 
 export interface User {
-    id: string;
+    id: number;
     username: string;
     email: string;
     password: string;
@@ -10,6 +10,7 @@ export interface User {
     aboutMe?:string;
     firstName?: string;
     lastName?: string;
+    imageUrl: string;
     roles: any[];
     articles: Article[];
     

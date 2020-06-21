@@ -88,11 +88,15 @@
       <div class="card card-user">
         <div class="card-body">
           <div class="author">
-              <img src="../assets/img/H.jpg" class="rounded" >
+            <div class="img-wrapper">
+              <img class="rounded" [src]=imageUrl *ngIf=imageUrl>
+              <div class="img-overlay">
+                <label class="btn btn-md btn-success custom-img">
+                  <input type="file" (change)="selectFileAndUpload($event)" />
+                </label> 
+              </div>
+            </div>
               <h4 class="title">{{user.username}}</h4>
-            <!-- <p class="description">
-              michael24
-            </p> -->
           </div>
           <p class="description text-center">
             {{user.aboutMe}}

@@ -50,6 +50,8 @@ public class User implements Serializable {
 
     private String lastName;
 
+    private String imageUrl;
+
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonDeserialize(using = AddressCustomDeserializer.class)
     private Address address;

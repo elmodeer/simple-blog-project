@@ -1,5 +1,6 @@
 package com.elmodeer.blog.controllers;
 
+import com.elmodeer.blog.aws.AWSUtility;
 import com.elmodeer.blog.models.User;
 import com.elmodeer.blog.repository.UserRepository;
 import org.slf4j.Logger;
@@ -37,5 +38,36 @@ public class UserController {
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
+    @PostMapping("/updateImage")
+    public ResponseEntity<User> updateImageUrl(@RequestParam("fileName") String fileName, @RequestParam("userId") int userId) {
+        User user = userRepository.findById(new Long(userId))
+                .orElseThrow(() -> new EntityNotFoundException("no such user"));
+        user.setImageUrl(fileName);
+        userRepository.save(user);
+        return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/putImage/{fileName}")
+    public ResponseEntity<String> generatePresignedPutUrl(@PathVariable String fileName){
+        try {
+            String presignedPutUrl = AWSUtility.generatePresignedPutUrl(fileName);
+            if (presignedPutUrl != null) {
+                return ResponseEntity.status(HttpStatus.OK).body(presignedPutUrl);
+            }
+            throw new Exception();
+        } catch (Exception e) {
+            logger.info("Could not generate presigned Url for the file: " + fileName + "!");
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+        }
+    }
+
+
+    @GetMapping("/getImage/{userId}")
+    public ResponseEntity<String> generatePresignedGetUrl(@PathVariable int userId) {
+        User user = userRepository.findById(new Long(userId))
+                .orElseThrow(() -> new EntityNotFoundException("No such user was found"));
+        String getSignedUrl = AWSUtility.generatePresignedGetUrl(user.getImageUrl());
+        return ResponseEntity.ok().body(getSignedUrl);
+    }
 
 }

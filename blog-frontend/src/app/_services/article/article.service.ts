@@ -27,15 +27,19 @@ export class ArticleService {
     return this.http.get<Article[]>(API_URL + 'all');
   }
 
-  editPostImage(file: File, articleId: number): Observable<any> {
+  updateImageUrl(fileName: string, articleId: number){
     const formData: FormData = new FormData();
 
-    formData.append('file', file);
+    formData.append('fileName', fileName);
     formData.append('articleId', articleId.toString());
-    return this.http.post(API_URL + 'editImage', formData);
+    return this.http.post(API_URL + 'updateImage', formData);
   }
 
-  getGetSignedUrl(articleId: number): Observable<any>{
-    return this.http.get(API_URL + 'image/' + articleId, { responseType: 'text' });
+  generatePresignedPutUrl(file: File): Observable<any> {
+    return this.http.get(API_URL + 'putImage/' + file.name, { responseType: 'text' });
+  }
+
+  generatePresignedGetUrl(articleId: number): Observable<any>{
+    return this.http.get(API_URL + 'getImage/' + articleId, { responseType: 'text' });
   }
 }
